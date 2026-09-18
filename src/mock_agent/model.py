@@ -15,8 +15,8 @@ improvement (see run_trial.py's --min-delta noise floor).
 import torch.nn as nn
 
 CONFIG = {
-    "hidden_size": 8,
-    "lr": 0.01,
+    "hidden_size": 10,
+    "lr": 0.008,
     "epochs": 30,
 }
 
