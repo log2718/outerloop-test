@@ -1,6 +1,27 @@
 {
  "target": "log2718/outerloop-test",
- "published": 1789692385.989224,
- "runs": [],
+ "published": 1789750307.2605162,
+ "runs": [
+  {
+   "run_id": "blob-classify-20260918-164533-agent-01",
+   "agent": "agent-01",
+   "benchmark": "blob-classify",
+   "state": "implementing",
+   "phase": "",
+   "direction": "",
+   "since": 1789749933.33918,
+   "launches_used": 0,
+   "sleeps_used": 0,
+   "depth_k": 10,
+   "sleep_k": 20,
+   "exp_done": 0,
+   "exp_total": 0,
+   "exp_minutes": 0,
+   "eval_minutes": 0,
+   "gpu_hours_used": 0.0,
+   "gpu_hours_budget": 1.0,
+   "pr_url": ""
+  }
+ ],
  "queue": []
 }
