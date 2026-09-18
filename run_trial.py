@@ -44,8 +44,13 @@ def load_contract():
         return yaml.safe_load(f)
 
 
-def measure(ref: str, seed: int, command: str):
-    """Checks out `ref` into a throwaway worktree and runs `command` there."""
+def measure(ref: str, seed: int, command: str, role: str):
+    """Checks out `ref` into a throwaway worktree and runs `command` there.
+
+    wandb's own run dir is pointed at REPO_ROOT (not the worktree), so the
+    run survives the worktree's teardown; baseline and candidate share a
+    WANDB_RUN_GROUP so they land side by side in the UI for this trial.
+    """
     with tempfile.TemporaryDirectory() as tmp:
         worktree = os.path.join(tmp, "wt")
         subprocess.run(
@@ -55,6 +60,10 @@ def measure(ref: str, seed: int, command: str):
         try:
             env = os.environ.copy()
             env["OUTERLOOP_SEED"] = str(seed)
+            env.setdefault("WANDB_MODE", "offline")
+            env["WANDB_DIR"] = REPO_ROOT
+            env["WANDB_RUN_GROUP"] = f"trial-seed{seed}"
+            env["WANDB_JOB_TYPE"] = role
             result = subprocess.run(
                 command.split(), cwd=worktree, env=env,
                 check=True, capture_output=True, text=True,
@@ -89,8 +98,8 @@ def main():
     print(f"benchmark: {bench['name']}   command: {command}")
     print(f"shared seed (drawn fresh this measurement pass): {seed}\n")
 
-    _, baseline_value = measure(args.baseline_ref, seed, command)
-    _, candidate_value = measure(args.candidate_ref, seed, command)
+    _, baseline_value = measure(args.baseline_ref, seed, command, role="baseline")
+    _, candidate_value = measure(args.candidate_ref, seed, command, role="candidate")
     delta = candidate_value - baseline_value
     improved = delta > args.min_delta
 

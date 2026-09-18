@@ -19,6 +19,7 @@ docs/
   roadmap.md                <- self-initiated task selection reads this
 run_trial.py                <- tiny orchestrator stand-in (measures via git worktrees)
 requirements.txt
+wandb/                       <- local run logs (offline mode, gitignored)
 ```
 
 ## Setup
@@ -61,6 +62,24 @@ architecture.md:
 If the delta clears `--min-delta` (default `0.02`), the script prints
 "would open a PR" -- standing in for the real system's `metric improved?`
 gate. Below that, it's an honest negative result, not a failure.
+
+## Inspecting runs with wandb
+
+`benchmarks/blob_classify.py` logs every run (config, the training loss
+curve, final accuracy) to wandb. It defaults to `WANDB_MODE=offline`, so
+no account or network access is required. `run_trial.py` points
+`WANDB_DIR` at the repo root -- not the throwaway worktree -- so a run
+survives after its worktree is torn down, and tags baseline/candidate
+runs from the same trial with a shared `WANDB_RUN_GROUP` so they land
+side by side.
+
+```
+wandb offline-run-*   # written under ./wandb after any trial
+wandb sync ./wandb/offline-run-<id>   # push to your account, if you want
+```
+
+To log online instead, set `WANDB_MODE=online` and `WANDB_API_KEY`
+before running `run_trial.py`.
 
 ## What this deliberately leaves out
 

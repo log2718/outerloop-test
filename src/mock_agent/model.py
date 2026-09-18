@@ -22,12 +22,12 @@ CONFIG = {
 
 
 class TinyMLP(nn.Module):
-    def __init__(self, n_features: int, hidden_size: int):
+    def __init__(self, n_features: int, hidden_size: int, n_classes: int = 2):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(n_features, hidden_size),
             nn.ReLU(),
-            nn.Linear(hidden_size, 2),
+            nn.Linear(hidden_size, n_classes),
         )
 
     def forward(self, x):
