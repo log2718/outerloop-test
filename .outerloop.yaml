@@ -3,6 +3,7 @@ benchmarks:
     command: python benchmarks/blob_classify.py
     metric: accuracy
     direction: max          # higher is better
+    min_delta: 0.02         # noise floor; below this is seed luck, not progress
 budgets:
   gpu_hours_per_run: 1
   runs_per_week: 50
