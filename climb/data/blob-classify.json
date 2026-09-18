@@ -50,5 +50,31 @@
   "pr_url": "",
   "report": "",
   "note": "dispatched eval baseline-5957d6bdd5425687a7cf630409e10b30de5eef77-98ebcff9963ff55385850a448691b4771c692656: no\u2026"
+ },
+ {
+  "run_id": "blob-classify-20260918-164533-agent-01",
+  "agent": "agent-01",
+  "ended": "2026-09-18 16:45:33",
+  "outcome": "aborted",
+  "baseline": null,
+  "candidate": null,
+  "gpu_hours": 0.0,
+  "hypothesis": "The baseline single-hidden-layer network (20\u21928\u21924) creates an information bottleneck too restrictive for learning on a small, noisy dataset. Adding a second hidd",
+  "pr_url": "",
+  "report": "reports/2026-09-18-blob-classify-20260918-164533-agent-01.md",
+  "note": "dispatched eval baseline-5957d6bdd5425687a7cf630409e10b30de5eef77-98ebcff9963ff55385850a448691b4771c692656: no\u2026"
+ },
+ {
+  "run_id": "blob-classify-20260918-170150-agent-01",
+  "agent": "agent-01",
+  "ended": "2026-09-18 17:01:50",
+  "outcome": "negative-result",
+  "baseline": 0.4749999940395355,
+  "candidate": 0.4650000035762787,
+  "gpu_hours": 0.0,
+  "hypothesis": "The baseline model's single-hidden-layer architecture (20\u21928\u21924) creates a sharp information bottleneck that discards too much signal before the classification la",
+  "pr_url": "",
+  "report": "",
+  "note": "a negative result reported clearly is a success"
  }
 ]
