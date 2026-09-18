@@ -1,7 +1,8 @@
 benchmarks:
   - name: blob-classify
     command: python benchmarks/blob_classify.py
-    metric: accuracy        # higher is better
+    metric: accuracy
+    direction: max          # higher is better
 budgets:
   gpu_hours_per_run: 1
   runs_per_week: 20
