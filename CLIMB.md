@@ -6,10 +6,11 @@ chart: open `index.html` from a clone of this branch.
 
 ## blob-classify
 
-Attempts: **6** (0 improved) · best candidate: **0.4650000035762787** (max) · GPU-hours: **0.0**
+Attempts: **7** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
 
 | ended (UTC) | agent | hypothesis | outcome | candidate | GPU-h | full |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-09-18 23:49:56 | agent-01 | The baseline model (hiddensize=8, lr=0.01, epochs=30) underperforms due to a combination… | [merged](https://github.com/log2718/outerloop-test/pull/2) | 0.4950000047683716 | 0 | [report](reports/2026-09-18-blob-classify-20260918-171526-agent-01.md) |
 | 2026-09-18 17:01:50 | agent-01 | The baseline model's single-hidden-layer architecture (20→8→4) creates a sharp… | negative-result — a negative result reported clearly is a success | 0.4650000035762787 | 0 |  |
 | 2026-09-18 16:45:33 | agent-01 | The baseline single-hidden-layer network (20→8→4) creates an information bottleneck too… | aborted — dispatched eval… | — | 0 | [report](reports/2026-09-18-blob-classify-20260918-164533-agent-01.md) |
 | 2026-09-18 16:32:39 | agent-01 | The baseline model (hiddensize=8, lr=0.01, epochs=30) underperforms due to insufficient… | aborted — dispatched eval… | — | 0 |  |
