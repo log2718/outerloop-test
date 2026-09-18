@@ -14,8 +14,9 @@ This script does the same thing at toy scale, using real git:
      pre-session commit").
   3. Runs the SAME command in each, with the SAME freshly-drawn seed
      injected via OUTERLOOP_SEED (paired, common random numbers).
-  4. Parses the ruler's `RESULT metric=... value=...` line and reports
-     whether the delta clears --min-delta.
+  4. Parses the last line of stdout as JSON, the same way outerloop's own
+     orchestrator.metric_from_output does, and reports whether the delta
+     clears --min-delta.
 
 Both refs must be committed (branches or SHAs) -- git worktrees can't
 check out a dirty working tree, which is itself a faithful constraint:
@@ -27,16 +28,40 @@ Usage (after you've made a candidate branch with a model.py change):
 """
 
 import argparse
+import json
 import os
 import random
-import re
 import subprocess
 import tempfile
 
 import yaml
 
-RESULT_RE = re.compile(r"RESULT metric=(\S+) value=([\d.]+)")
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+
+def metric_from_output(stdout: str, metric: str) -> float | None:
+    """Same contract as outerloop's own orchestrator.metric_from_output: the
+    metric from the LAST single-line JSON object that carries it. No regex
+    fallback -- a fuzzy match risks reading the wrong number."""
+    for line in reversed(stdout.strip().splitlines()):
+        line = line.strip()
+        if not line.startswith("{"):
+            continue
+        try:
+            data = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict) and metric in data:
+            try:
+                return float(data[metric])
+            except (TypeError, ValueError):
+                return None
+        if isinstance(data, dict) and data.get("metric") == metric and "value" in data:
+            try:
+                return float(data["value"])
+            except (TypeError, ValueError):
+                return None
+    return None
 
 
 def load_contract():
@@ -44,7 +69,7 @@ def load_contract():
         return yaml.safe_load(f)
 
 
-def measure(ref: str, seed: int, command: str, role: str):
+def measure(ref: str, seed: int, command: str, role: str, metric: str):
     """Checks out `ref` into a throwaway worktree and runs `command` there.
 
     wandb's own run dir is pointed at REPO_ROOT (not the worktree), so the
@@ -68,13 +93,13 @@ def measure(ref: str, seed: int, command: str, role: str):
                 command.split(), cwd=worktree, env=env,
                 check=True, capture_output=True, text=True,
             )
-            match = RESULT_RE.search(result.stdout)
-            if not match:
+            value = metric_from_output(result.stdout, metric)
+            if value is None:
                 raise RuntimeError(
-                    f"No RESULT line from '{command}' at {ref}.\n"
+                    f"No readable {metric!r} in output of '{command}' at {ref}.\n"
                     f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
                 )
-            return match.group(1), float(match.group(2))
+            return metric, value
         finally:
             subprocess.run(
                 ["git", "worktree", "remove", "--force", worktree],
@@ -98,8 +123,8 @@ def main():
     print(f"benchmark: {bench['name']}   command: {command}")
     print(f"shared seed (drawn fresh this measurement pass): {seed}\n")
 
-    _, baseline_value = measure(args.baseline_ref, seed, command, role="baseline")
-    _, candidate_value = measure(args.candidate_ref, seed, command, role="candidate")
+    _, baseline_value = measure(args.baseline_ref, seed, command, role="baseline", metric=metric_name)
+    _, candidate_value = measure(args.candidate_ref, seed, command, role="candidate", metric=metric_name)
     delta = candidate_value - baseline_value
     improved = delta > args.min_delta
 

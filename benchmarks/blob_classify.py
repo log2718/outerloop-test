@@ -17,12 +17,14 @@ invoking this command -- the contract's command text itself stays fixed,
 exactly as the real system requires ("contract: benchmarks, scope,
 budgets (verbatim)").
 
-Output contract: prints exactly one line of the form
-    RESULT metric=<name> value=<float>
-A driver simply greps stdout for that line -- standing in for the real
-orchestrator's structured result parsing. wandb is a side channel for
-humans inspecting a run's curves after the fact; the RESULT line remains
-the one thing the orchestrator itself trusts.
+Output contract: the LAST line of stdout is a single-line JSON object
+    {"metric": "<name>", "value": <float>}
+This matches outerloop's own orchestrator.metric_from_output, which scans
+stdout in reverse for the last line starting with "{" and parses it --
+no regex fallback, by design, since a fuzzy match risks reading the wrong
+number. wandb is a side channel for humans inspecting a run's curves
+after the fact; this JSON line remains the one thing the orchestrator
+itself trusts, so nothing may print to stdout after it.
 
 wandb: every run logs config + the loss curve + final accuracy. Defaults
 to WANDB_MODE=offline (no network, no login needed) so it never blocks an
@@ -31,6 +33,7 @@ repo so runs survive their throwaway worktree, and groups baseline vs
 candidate together so they land side by side in the UI.
 """
 
+import json
 import os
 import random
 import subprocess
@@ -136,7 +139,7 @@ def main() -> None:
     run.summary["accuracy"] = accuracy
     run.finish()
 
-    print(f"RESULT metric=accuracy value={accuracy:.4f}")
+    print(json.dumps({"metric": "accuracy", "value": accuracy}))
 
 
 if __name__ == "__main__":
