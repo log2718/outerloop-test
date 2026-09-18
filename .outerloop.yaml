@@ -5,7 +5,8 @@ benchmarks:
     direction: max          # higher is better
 budgets:
   gpu_hours_per_run: 1
-  runs_per_week: 20
+  runs_per_week: 50
+  attempt_cooldown_minutes: 5   # default is 6h; this benchmark finishes in ~1s
 scope:
   allowed: [src/, tests/]
 roadmap: docs/roadmap.md
