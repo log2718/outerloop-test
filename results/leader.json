@@ -1,0 +1,12 @@
+{
+  "blob-classify": {
+    "benchmark": "blob-classify",
+    "metric": "accuracy",
+    "direction": "max",
+    "baseline": 0.4749999940395355,
+    "best": 0.4950000047683716,
+    "best_run": "blob-classify-20260918-171526-agent-01",
+    "updated": "2026-09-18",
+    "run_seed": 0
+  }
+}
