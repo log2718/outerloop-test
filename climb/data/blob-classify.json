@@ -167,5 +167,18 @@
   "pr_url": "",
   "report": "",
   "note": "unmeasured: the sealed tree is unchanged from base"
+ },
+ {
+  "run_id": "blob-classify-20260919-015426-agent-01",
+  "agent": "agent-01",
+  "ended": "2026-09-19 01:54:26",
+  "outcome": "negative-result",
+  "baseline": 0.4950000047683716,
+  "candidate": null,
+  "gpu_hours": 0.0,
+  "hypothesis": "1: Scaled down initial weights (0.1\u00d7) to reduce noise-gradient dominance",
+  "pr_url": "",
+  "report": "",
+  "note": "unmeasured: the sealed tree is unchanged from base"
  }
 ]
