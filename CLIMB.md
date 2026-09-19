@@ -6,10 +6,11 @@ chart: open `index.html` from a clone of this branch.
 
 ## blob-classify
 
-Attempts: **15** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
+Attempts: **16** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
 
 | ended (UTC) | agent | hypothesis | outcome | candidate | GPU-h | full |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-09-19 02:14:26 | agent-01 | The baseline model (ReLU, hiddensize=10, lr=0.008, epochs=30, achieving 0.495 accuracy… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-19 02:04:26 | agent-01 | The baseline model (ReLU, hiddensize=10, lr=0.008, epochs=30, achieving 0.495 accuracy… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-19 01:54:26 | agent-01 | 1: Scaled down initial weights (0.1×) to reduce noise-gradient dominance | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-19 01:36:06 | agent-01 | The baseline model (hiddensize=10, lr=0.008, epochs=30, achieving ~0.495 accuracy on… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
