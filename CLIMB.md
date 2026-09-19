@@ -6,10 +6,11 @@ chart: open `index.html` from a clone of this branch.
 
 ## blob-classify
 
-Attempts: **8** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
+Attempts: **9** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
 
 | ended (UTC) | agent | hypothesis | outcome | candidate | GPU-h | full |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-09-19 00:08:27 | agent-01 | The baseline model (hiddensize=10, lr=0.008, epochs=30) achieving 0.495 accuracy is… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-18 23:54:57 | agent-01 |  | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-18 23:49:56 | agent-01 | The baseline model (hiddensize=8, lr=0.01, epochs=30) underperforms due to a combination… | [merged](https://github.com/log2718/outerloop-test/pull/2) | 0.4950000047683716 | 0 | [report](reports/2026-09-18-blob-classify-20260918-171526-agent-01.md) |
 | 2026-09-18 17:01:50 | agent-01 | The baseline model's single-hidden-layer architecture (20→8→4) creates a sharp… | negative-result — a negative result reported clearly is a success | 0.4650000035762787 | 0 |  |
