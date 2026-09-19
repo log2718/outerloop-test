@@ -89,5 +89,18 @@
   "pr_url": "https://github.com/log2718/outerloop-test/pull/2",
   "report": "reports/2026-09-18-blob-classify-20260918-171526-agent-01.md",
   "note": ""
+ },
+ {
+  "run_id": "blob-classify-20260918-235457-agent-01",
+  "agent": "agent-01",
+  "ended": "2026-09-18 23:54:57",
+  "outcome": "negative-result",
+  "baseline": 0.4950000047683716,
+  "candidate": null,
+  "gpu_hours": 0.0,
+  "hypothesis": "",
+  "pr_url": "",
+  "report": "",
+  "note": "unmeasured: the sealed tree is unchanged from base"
  }
 ]
