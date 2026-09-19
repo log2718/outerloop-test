@@ -6,10 +6,11 @@ chart: open `index.html` from a clone of this branch.
 
 ## blob-classify
 
-Attempts: **11** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
+Attempts: **12** (1 improved) · best candidate: **0.4950000047683716** (max) · baseline (start): **0.4749999940395355** · GPU-hours: **0.0**
 
 | ended (UTC) | agent | hypothesis | outcome | candidate | GPU-h | full |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-09-19 01:01:48 | agent-01 | The baseline model (ReLU activation with hiddensize=10, lr=0.008, epochs=30, achieving… | negative-result — a negative result reported clearly is a success | 0.47999998927116394 | 0 |  |
 | 2026-09-19 00:47:03 | agent-01 | The baseline model (hiddensize=10, lr=0.008, epochs=30, baseline 0.495) underperforms… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
 | 2026-09-19 00:30:08 | agent-01 | The baseline single-hidden-layer architecture (20→10→4) may underperform because it… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 | [report](reports/2026-09-19-blob-classify-20260919-003008-agent-01.md) |
 | 2026-09-19 00:08:27 | agent-01 | The baseline model (hiddensize=10, lr=0.008, epochs=30) achieving 0.495 accuracy is… | negative-result — unmeasured: the sealed tree is unchanged from base | — | 0 |  |
